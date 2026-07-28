@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Nuevo Proveedor - El Solterito{% endblock %}
+{% block page_title %}Nuevo Proveedor{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto">
+    {% include 'includes/page_header.html' with title='Nuevo Proveedor' subtitle='Registra un nuevo proveedor y sus condiciones comerciales.' %}
+
+    <div class="card p-6 card-accent card-accent-blue">
+        <form method="post" novalidate>
+            {% csrf_token %}
+            {% if form.errors %}
+            <div class="alert-danger mb-6">
+                <p class="font-semibold">Por favor corrige los errores:</p>
+                {% if form.non_field_errors %}
+                <div class="mt-2 text-sm">{{ form.non_field_errors }}</div>
+                {% endif %}
+            </div>
+            {% endif %}
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {% for field in form %}
+                {% if field.name == 'direccion' or field.name == 'terminos_pago' %}
+                {% include 'includes/form_field.html' with field=field colspan='full' %}
+                {% else %}
+                {% include 'includes/form_field.html' with field=field %}
+                {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="mt-8 flex flex-col sm:flex-row sm:space-x-3 space-y-3 sm:space-y-0">
+                <button type="submit" class="btn-primary">Guardar Proveedor</button>
+                <a href="{% url 'inventario:lista_proveedores' %}" class="btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

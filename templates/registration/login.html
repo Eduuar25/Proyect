@@ -1,0 +1,48 @@
+<!-- templates/registration/login.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Iniciar Sesión - El Solterito{% endblock %}
+
+{% block login_content %}
+<div class="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8">
+        <div>
+            <h2 class="mt-6 text-center kpi-value text-teal-800 dark:text-teal-400">
+                Tienda El Solterito
+            </h2>
+            <p class="mt-2 text-center page-subtitle">
+                Ingresa tus credenciales para acceder al sistema
+            </p>
+        </div>
+        
+        <form class="mt-8 space-y-6" method="post">
+            {% csrf_token %}
+            
+            {% if form.errors %}
+            <div class="alert-danger" role="alert">
+                <p class="font-bold">Error:</p>
+                <p>Usuario o contraseña incorrectos.</p>
+            </div>
+            {% endif %}
+            
+            <div class="space-y-3">
+                <div>
+                    <label for="id_username" class="sr-only">Usuario</label>
+                    <input id="id_username" name="username" type="text" required placeholder="Usuario">
+                </div>
+                <div>
+                    <label for="id_password" class="sr-only">Contraseña</label>
+                    <input id="id_password" name="password" type="password" required placeholder="Contraseña">
+                </div>
+            </div>
+
+            <div>
+                <button type="submit" class="btn-primary w-full py-2.5">
+                    Iniciar Sesión
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

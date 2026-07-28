@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Nueva Categoría - El Solterito{% endblock %}
+{% block page_title %}Nueva Categoría{% endblock %}
+
+{% block content %}
+<div class="max-w-xl mx-auto">
+    {% include 'includes/page_header.html' with title='Nueva Categoría' subtitle='Registra una nueva categoría de productos.' %}
+
+    <div class="card p-6 card-accent card-accent-blue">
+        <form method="post" novalidate>
+            {% csrf_token %}
+            {% if form.errors %}
+            <div class="alert-danger mb-6">
+                <p class="font-semibold">Por favor corrige los errores:</p>
+                {% if form.non_field_errors %}
+                <div class="mt-2 text-sm">{{ form.non_field_errors }}</div>
+                {% endif %}
+            </div>
+            {% endif %}
+
+            <div class="space-y-5">
+                {% for field in form %}
+                {% include 'includes/form_field.html' with field=field %}
+                {% endfor %}
+            </div>
+
+            <div class="mt-8 flex flex-col sm:flex-row sm:space-x-3 space-y-3 sm:space-y-0">
+                <button type="submit" class="btn-primary">Guardar Categoría</button>
+                <a href="{% url 'inventario:lista_productos' %}" class="btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
