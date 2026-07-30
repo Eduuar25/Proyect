@@ -35,10 +35,10 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'dev-only-insecure-secret-key-c
 # DEBUG
 DEBUG = _get_bool_env('DJANGO_DEBUG', default=not IS_PRODUCTION)
 
-default_hosts = '127.0.0.1,localhost,0.0.0.0,testserver,.pythonanywhere.com'
+default_hosts = '127.0.0.1,localhost,0.0.0.0,testserver,.pythonanywhere.com,.vercel.app'
 ALLOWED_HOSTS = _get_list_env('DJANGO_ALLOWED_HOSTS', default=default_hosts)
 
-default_csrf_origins = 'https://*.pythonanywhere.com'
+default_csrf_origins = 'https://*.pythonanywhere.com,https://*.vercel.app'
 CSRF_TRUSTED_ORIGINS = _get_list_env('DJANGO_CSRF_TRUSTED_ORIGINS', default=default_csrf_origins)
 
 INSTALLED_APPS = [
